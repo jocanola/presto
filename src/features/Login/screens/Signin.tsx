@@ -13,6 +13,8 @@ import { Colors } from "@/src/shared/constants/Colors";
 import { Typography } from "@/src/shared/constants/Typography";
 import Icon from "react-native-vector-icons/Ionicons";
 import { AnimatedPressable } from "@/src/shared/components/Button/AnimatedPressable";
+import Animated from "react-native-reanimated";
+import { entrances } from "@/src/shared/animation/entrances";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -27,12 +29,18 @@ export default function SignIn() {
       <View style={styles.container}>
         <Stack.Screen options={{ headerShown: false }} />
 
-        <View style={styles.welcomeBlob}>
-          <Text style={styles.welcomeText}>Welcome</Text>
-        </View>
+        <Animated.View entering={entrances.fadeInUp(280, 0)} style={styles.brandRow}>
+          <Image
+            source={require("@/src/assets/images/presto-logo.png")}
+            style={styles.brandIcon}
+            resizeMode="contain"
+            accessibilityLabel="App logo"
+          />
+          <Text style={styles.brandText}>Presto</Text>
+        </Animated.View>
 
-        <View style={styles.form}>
-          <View style={styles.inputWrap}>
+        <Animated.View entering={entrances.fadeInUp(320, 40)} style={styles.form}>
+          <Animated.View entering={entrances.fadeInUp(320, 60)} style={styles.inputWrap}>
             <TextInput
               value={email}
               onChangeText={setEmail}
@@ -43,9 +51,9 @@ export default function SignIn() {
               style={styles.input}
               accessibilityLabel="Email"
             />
-          </View>
+          </Animated.View>
 
-          <View style={styles.inputWrap}>
+          <Animated.View entering={entrances.fadeInUp(320, 80)} style={styles.inputWrap}>
             <TextInput
               value={password}
               onChangeText={setPassword}
@@ -69,11 +77,12 @@ export default function SignIn() {
                 color={Colors.textPrimary}
               />
             </AnimatedPressable>
-          </View>
+          </Animated.View>
 
           <AnimatedPressable
             accessibilityLabel="Forgot Password"
             style={styles.forgotBtn}
+            entering={entrances.fadeIn(260, 100)}
           >
             <Text style={styles.forgotText}>Forgot Password?</Text>
           </AnimatedPressable>
@@ -81,23 +90,25 @@ export default function SignIn() {
           <AnimatedPressable
             style={styles.primaryBtn}
             accessibilityLabel="Sign In"
+            entering={entrances.fadeInUp(320, 120)}
           >
             <Text style={styles.primaryBtnText}>Sign In</Text>
           </AnimatedPressable>
 
-          <View style={styles.signupRow}>
+          <Animated.View entering={entrances.fadeIn(240, 140)} style={styles.signupRow}>
             <Text style={styles.signupText}>New Here? </Text>
             <AnimatedPressable accessibilityLabel="Sign Up">
               <Text style={styles.signupLink}>Sign Up</Text>
             </AnimatedPressable>
-          </View>
-        </View>
+          </Animated.View>
+        </Animated.View>
 
-        <Image
+        <Animated.Image
           source={require("@/src/assets/images/wavy-bottom.png")}
           style={styles.wave}
           resizeMode="stretch"
           accessibilityLabel="Decorative wavy bottom"
+          entering={entrances.fadeIn(300, 160)}
         />
       </View>
     </KeyboardAvoidingView>
@@ -112,20 +123,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.background,
   },
-  welcomeBlob: {
-    marginTop: 12,
-    marginLeft: H_PADDING,
-    width: 190,
-    height: 140,
-    backgroundColor: Colors.gray,
-    borderRadius: 100,
-    justifyContent: "center",
-    paddingLeft: 18,
+  brandRow: {
+    flex: 0.5,
+    paddingHorizontal: H_PADDING,
+    paddingTop: 28,
+    flexDirection: "row",
+    gap: 10,
   },
-  welcomeText: {
-    color: Colors.textPrimary,
+  brandIcon: {
+    width: 32,
+    height: 32,
+  },
+  brandText: {
+    color: Colors.primaryBrand,
     fontFamily: Typography.fontFamily.bold,
-    fontSize: Typography.fontSize["2xl"],
+    fontSize: Typography.fontSize["3xl"],
     letterSpacing: Typography.letterSpacing.tight,
   },
   form: {
@@ -199,9 +211,9 @@ const styles = StyleSheet.create({
   wave: {
     position: "absolute",
     left: 0,
-    right: 0,
-    bottom: 0,
-    width: "100%",
+    right: 20,
+    bottom: -70,
+    width: "120%",
     height: 120,
   },
 });
