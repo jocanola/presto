@@ -1,4 +1,3 @@
-# Simple Store Mobile
 
 This project is an Expo/React Native app with a clean, modern architecture and a simple onboarding and authentication UI. It uses file‑based routing, local query persistence, and animated UI components.
 
