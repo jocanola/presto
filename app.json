@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "Presto",
+    "slug": "Presto",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/icons/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./src/assets/icons/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/icons/splash.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.jocanola.simplestore",
+      "runtimeVersion": "1.0.0"
+    },
+    "web": {
+      "bundler": "webpack",
+      "output": "static"
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d2e088d3-4ea0-445f-b705-d8e39b985847"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/d2e088d3-4ea0-445f-b705-d8e39b985847"
+    }
+  }
+}

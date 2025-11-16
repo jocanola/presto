@@ -1,0 +1,37 @@
+name: iOS Submit to internal testing
+
+on:
+  push:
+    branches:
+      - new-features
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+          cache: "npm"
+
+      - name: Setup Expo
+        uses: expo/expo-github-action@v8
+        with:
+          expo-version: latest
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      # - name: Increment version
+      #   run: yarn increment-version
+
+      - name: Build Android app
+        run: eas build --platform ios --profile production --local --output ${{ github.workspace }}/app-release.ipa --non-interactive
+      - name: Submit to Apple Store
+        run: |
+          eas submit -p ios --profile production --path ${{ github.workspace }}/app-release.ipa --non-interactive
